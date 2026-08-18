@@ -2,25 +2,105 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #16231d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Vitala brand palette */
+  --color-paper: #f4f6f3;
+  --color-ink: #16231d;
+  --color-ink-soft: #4b5a52;
+  --color-brand: #0b7a5b;
+  --color-brand-deep: #075a42;
+  --color-stamp: #b23a2f;
+  --color-manila: #e7dcbb;
+  --color-manila-deep: #ddcda0;
+  --color-manila-line: #c9b98a;
+  --color-hairline: #d7ded8;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* -- Vitala landing: signature "ficha" reveal ---------------------------- */
+
+@keyframes kd-settle {
+  from {
+    opacity: 0;
+    transform: translateY(14px) rotate(-6deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(-2deg);
+  }
+}
+
+@keyframes kd-field-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes kd-stamp-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.6) rotate(2deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.94) rotate(-9deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-9deg);
+  }
+}
+
+.kd-card {
+  animation: kd-settle 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.kd-field {
+  opacity: 0;
+  animation: kd-field-in 500ms ease-out both;
+}
+
+.kd-field-1 { animation-delay: 300ms; }
+.kd-field-2 { animation-delay: 450ms; }
+.kd-field-3 { animation-delay: 600ms; }
+.kd-field-4 { animation-delay: 750ms; }
+.kd-field-5 { animation-delay: 900ms; }
+
+.kd-stamp {
+  opacity: 0;
+  animation: kd-stamp-in 550ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: 1150ms;
+}
+
+.kd-tab {
+  clip-path: polygon(0 14px, 14px 0, 100% 0, 100% 100%, 0 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kd-card,
+  .kd-field,
+  .kd-stamp {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .kd-card { transform: rotate(-2deg) !important; }
+  .kd-stamp { transform: rotate(-9deg) !important; }
 }
